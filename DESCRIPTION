@@ -1,0 +1,12 @@
+Package: Friedman
+Title: Shortcut functions for data mining
+Version: 0.0.0.9000
+Authors@R: Benjamin Luke
+    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+Description: This package is designed to compile the process of data mining through cleaning data and analyzing it into one or two functions.
+Imports: usethis::use_package("dplyr", rlang (>= 1.0.0))
+Depends: R (>= 3.1.2)
+License: `use_CC0_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
