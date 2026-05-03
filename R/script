@@ -1,0 +1,45 @@
+cleaned_html <- function(x) {
+  x = unlist(xpathApply(x, '//p', xmlValue))
+  x = gsub('\\n', ' ', x)
+  x = gsub('\\r', ' ', x)
+  x <- x %>% str_replace_all(pattern = "[[:punct:]]", replacement = "")
+  x <- tolower(x)
+  x<- as.data.frame(x)
+}
+
+cleaned_txt <- function(x) {
+  x = gsub('\\n', ' ', x)
+  x = gsub('\\r', ' ', x)
+  x <- x %>% str_replace_all(pattern = "[[:punct:]]", replacement = "")
+  x <- tolower(x)
+  x<- as.data.frame(x)
+}
+
+tokenized_txt <- function(x) {
+  x %>%
+  unnest_tokens(word, x)
+}
+
+replace_w_zero <- function(x) {
+  x <- x %>% replace(is.na(.), 0)
+}
+
+replace_column_w_mean <- function(x) {
+  mean_col <- mean(x, na.rm=TRUE)
+  x <- x %>% replace(is.na(.), mean_col)
+}
+
+ggcol <- function(data,x, y, width=1, color="blue") {
+  ggplot (data, aes(x, y)) +
+  geom_col(width=width, fill=color)
+}
+
+ggscatter <- function(data,x, y, size=1, color="blue") {
+  ggplot (data, aes(x, y)) +
+    geom_point(size=size, color=color)
+}
+
+ggbox <- function(data,x, y, width=1, color="blue") {
+  ggplot (data, aes(x, y)) +
+    geom_boxplot(width=width, fill=color)
+}
