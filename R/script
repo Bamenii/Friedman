@@ -1,3 +1,13 @@
+#' @import dplyr
+#' @import ggplot2
+#' @import stringr
+#' @import tidytext
+#' @import XML
+#'
+#' @title cleaned html
+#' @description convert html to txt and clean
+#' @param x data frame being cleaned/visualized
+#' @export
 cleaned_html <- function(x) {
   x = unlist(xpathApply(x, '//p', xmlValue))
   x = gsub('\\n', ' ', x)
@@ -6,40 +16,62 @@ cleaned_html <- function(x) {
   x <- tolower(x)
   x<- as.data.frame(x)
 }
-
+#' @title cleaned txt
+#' @description clean txt
+#' @param x data frame being cleaned/visualized
+#' @export
 cleaned_txt <- function(x) {
   x = gsub('\\n', ' ', x)
   x = gsub('\\r', ' ', x)
   x <- x %>% str_replace_all(pattern = "[[:punct:]]", replacement = "")
-  x <- tolower(x)
   x<- as.data.frame(x)
 }
-
+#' @title tokenized txt
+#' @description tokenize txt
+#' @param x data frame being cleaned/visualized
+#' @export
 tokenized_txt <- function(x) {
   x %>%
   unnest_tokens(word, x)
 }
-
+#' @title replace with zero
+#' @description replaces N/A values with 0
+#' @param x data frame being cleaned/visualized
+#' @export
 replace_w_zero <- function(x) {
   x <- x %>% replace(is.na(.), 0)
 }
-
+#' @title replace column with mean
+#' @description replaces N/A values in a column with the column mean
+#' @param x data frame being cleaned/visualized
+#' @export
 replace_column_w_mean <- function(x) {
   mean_col <- mean(x, na.rm=TRUE)
   x <- x %>% replace(is.na(.), mean_col)
 }
-
+#' @title ggcol
+#' @description bar chart shorthand
+#' @param x data frame being cleaned/visualized
+#' @export
 ggcol <- function(data,x, y, width=1, color="blue") {
   ggplot (data, aes(x, y)) +
   geom_col(width=width, fill=color)
 }
-
+#' @title ggscatter
+#' @description scatter plot shorthand
+#' @param x data frame being cleaned/visualized
+#' @export
 ggscatter <- function(data,x, y, size=1, color="blue") {
   ggplot (data, aes(x, y)) +
     geom_point(size=size, color=color)
 }
-
+#' @title ggbox
+#' @description boxplot shorthand
+#' @param x data frame being cleaned/visualized
+#' @export
 ggbox <- function(data,x, y, width=1, color="blue") {
   ggplot (data, aes(x, y)) +
     geom_boxplot(width=width, fill=color)
 }
+
+
