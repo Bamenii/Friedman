@@ -10,6 +10,7 @@ Depends:
     stringr,
     tidytext,
     XML
+URL: https://github.com/Bamenii/Easygraph/blob/main/R
 License: GNU General Public License
 Encoding: UTF-8
 LazyData: true
