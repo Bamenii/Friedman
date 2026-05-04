@@ -4,7 +4,7 @@
 #' @import tidytext
 #' @import XML
 #'
-#' @title cleaned html
+#' @title cleaned_html
 #' @description convert html to txt and clean
 #' @param x data frame being cleaned/visualized
 #' @export
@@ -16,7 +16,7 @@ cleaned_html <- function(x) {
   x <- tolower(x)
   x<- as.data.frame(x)
 }
-#' @title cleaned txt
+#' @title cleaned_txt
 #' @description clean txt
 #' @param x data frame being cleaned/visualized
 #' @export
@@ -26,7 +26,7 @@ cleaned_txt <- function(x) {
   x <- x %>% str_replace_all(pattern = "[[:punct:]]", replacement = "")
   x<- as.data.frame(x)
 }
-#' @title tokenized txt
+#' @title tokenized_txt
 #' @description tokenize txt
 #' @param x data frame being cleaned/visualized
 #' @export
@@ -34,14 +34,14 @@ tokenized_txt <- function(x) {
   x %>%
   unnest_tokens(word, x)
 }
-#' @title replace with zero
+#' @title replace_w_zero
 #' @description replaces N/A values with 0
 #' @param x data frame being cleaned/visualized
 #' @export
 replace_w_zero <- function(x) {
   x <- x %>% replace(is.na(.), 0)
 }
-#' @title replace column with mean
+#' @title replace_column_w_mean
 #' @description replaces N/A values in a column with the column mean
 #' @param x data frame being cleaned/visualized
 #' @export
