@@ -4,7 +4,7 @@ Title: easy graphing
 Version: 0.1.0
 Author: Benjamin Luke
 Description: This package is designed to compile the process of data mining through cleaning data and analyzing it into one or two functions.
-Depends:
+Imports:
     dplyr,
     ggplot2,
     stringr,
