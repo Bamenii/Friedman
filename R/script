@@ -3,7 +3,7 @@
 #' @import stringr
 #' @import tidytext
 #' @import XML
-#'
+
 #' @title cleaned_html
 #' @description convert html to txt and clean
 #' @param x data frame being cleaned/visualized
@@ -16,6 +16,7 @@ cleaned_html <- function(x) {
   x <- tolower(x)
   x<- as.data.frame(x)
 }
+
 #' @title cleaned_txt
 #' @description clean txt
 #' @param x data frame being cleaned/visualized
@@ -26,6 +27,7 @@ cleaned_txt <- function(x) {
   x <- x %>% str_replace_all(pattern = "[[:punct:]]", replacement = "")
   x<- as.data.frame(x)
 }
+
 #' @title tokenized_txt
 #' @description tokenize txt
 #' @param x data frame being cleaned/visualized
@@ -34,6 +36,7 @@ tokenized_txt <- function(x) {
   x %>%
   unnest_tokens(word, x)
 }
+
 #' @title replace_w_zero
 #' @description replaces N/A values with 0
 #' @param x data frame being cleaned/visualized
@@ -41,6 +44,7 @@ tokenized_txt <- function(x) {
 replace_w_zero <- function(x) {
   x <- x %>% replace(is.na(.), 0)
 }
+
 #' @title replace_column_w_mean
 #' @description replaces N/A values in a column with the column mean
 #' @param x data frame being cleaned/visualized
@@ -49,25 +53,37 @@ replace_column_w_mean <- function(x) {
   mean_col <- mean(x, na.rm=TRUE)
   x <- x %>% replace(is.na(.), mean_col)
 }
+#' @export
 #' @title ggcol
 #' @description bar chart shorthand
-#' @param x data frame being cleaned/visualized
+#' @param x x-axis of graph
+#' @param y y-axis of graph
+#' @param width width of bars
+#' @param color color of graph
 #' @export
 ggcol <- function(data,x, y, width=1, color="blue") {
   ggplot (data, aes(x, y)) +
   geom_col(width=width, fill=color)
 }
+
 #' @title ggscatter
 #' @description scatter plot shorthand
-#' @param x data frame being cleaned/visualized
+#' @param x x-axis of graph
+#' @param y y-axis of graph
+#' @param size size of dots
+#' @param color color of graph
 #' @export
 ggscatter <- function(data,x, y, size=1, color="blue") {
   ggplot (data, aes(x, y)) +
     geom_point(size=size, color=color)
 }
+
 #' @title ggbox
 #' @description boxplot shorthand
-#' @param x data frame being cleaned/visualized
+#' @param x x-axis of graph
+#' @param y y-axis of graph
+#' @param width width of boxes
+#' @param color color of graph
 #' @export
 ggbox <- function(data,x, y, width=1, color="blue") {
   ggplot (data, aes(x, y)) +
